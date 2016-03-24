@@ -19,6 +19,10 @@ defmodule Rumbl.VideoChannel do
     { :ok, resp, assign(socket, :video_id, video_id) }
   end
 
+  def handle_in("tweet", params, socket) do
+    IO.puts('handle_in tweet paramsss #{inspect(params)}')
+  end
+
   def handle_in(event, params, socket) do
     user = Repo.get(Rumbl.User, socket.assigns.user_id)
     handle_in(event, params, user, socket)
@@ -40,5 +44,6 @@ defmodule Rumbl.VideoChannel do
         {:reply, {:error, %{errors: changeset}}, socket}
     end
   end
+
 
 end

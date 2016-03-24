@@ -27,7 +27,8 @@ defmodule Rumbl.Router do
     resources "/videos", VideoController
   end
   # Other scopes may use custom stacks.
-  # scope "/api", Rumbl do
-  #   pipe_through :api
-  # end
+   scope "/api", Rumbl do
+     pipe_through :api
+     post "/tweet/:video_id", WatchController, :tweet
+   end
 end

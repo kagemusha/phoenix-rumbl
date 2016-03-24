@@ -1,4 +1,10 @@
-<h2><%= @video.title %></h2>
+<h2>
+  <%= @video.title %>
+  <button id="tweetButton" class="btn btn-primary" >
+    Tweet
+  </button>
+</h2>
+
 <div class="row">
   <div class="col-sm-7">
     <%= content_tag :div, id: "video",

@@ -16,9 +16,8 @@ let Video = {
   onReady(videoId, socket){
     let msgContainer = document.getElementById("msg-container")
     let msgInput = document.getElementById("msg-input")
-    let postButton = document.getElementById("msg-submit")
-    let vidChannel = socket.channel("videos:" + videoId)
 
+    let postButton = document.getElementById("msg-submit")
     postButton.addEventListener("click", e => {
       let payload = {body: msgInput.value, at: Player.getCurrentTime() }
       vidChannel.push("new_annotation", payload)
@@ -26,6 +25,15 @@ let Video = {
       msgInput.value = ""
     })
 
+    let tweetButton = document.getElementById("tweetButton")
+    tweetButton.addEventListener("click", e => {
+      console.log(`twettING`);
+      const req =  new XMLHttpRequest()
+      req.open("POST", `/api/tweet/${videoId}`, true)
+      req.send()
+    })
+
+    let vidChannel = socket.channel("videos:" + videoId)
     vidChannel.on("new_annotation", (resp) => {
       vidChannel.params.last_seen_id = resp.id
       this.renderAnnotation(msgContainer, resp)
